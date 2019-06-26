@@ -1,12 +1,6 @@
 package email
 
 import (
-	"crypto/rand"
-	"crypto/rsa"
-	"crypto/x509"
-	"encoding/pem"
-	"errors"
-
 	"gopkg.in/gomail.v2"
 )
 
