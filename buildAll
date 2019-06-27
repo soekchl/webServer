@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "build common"
+cd common/config/
+go build
+
+cd ../email/
+go build
+
+cd ../redis/
+go build
+
+cd ../token/
+go build
+
+cd ../tools/
+go build
+
+cd ../../
+pwd
