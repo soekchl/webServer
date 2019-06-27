@@ -1,3 +1,4 @@
 *.exe
 *.tmp
 *.zip
+common/config/config.ini
