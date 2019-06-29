@@ -6,8 +6,8 @@ import (
 	"math/rand"
 	"sync"
 	"time"
-	redis "webServer/common/redis"
-	tools "webServer/common/tools"
+	redis "webServer/src/common/redis"
+	tools "webServer/src/common/tools"
 
 	. "github.com/soekchl/myUtils"
 )
@@ -34,7 +34,7 @@ func Config(redisSave bool, saveTokenSecond int, redisHeaderKey string) {
 	} else {
 		redisKey = redisHeaderKey
 	}
-
+	Warn("tokenConfig key=", redisHeaderKey, " saveRedis=", redisSave, " saveSecond=", saveTokenSecond)
 }
 
 func SetToken(id int, info string) (token string) {
@@ -54,6 +54,7 @@ func SetToken(id int, info string) (token string) {
 }
 
 func DelToken(id int) {
+	Debug(fmt.Sprintf("DelToken id=%v redis=%v", id, saveRedis))
 	if saveRedis {
 		oldToken := redis.Get(getIdKey(id))
 		if len(oldToken) > 0 {
@@ -77,13 +78,14 @@ func CheckToken(token string) string {
 }
 
 func checkTokenRedis(token string) string {
+	Debug(fmt.Sprintf("checkTokenRedis token=%v", token))
 	info := redis.Get(getTokenKey(token))
 	if len(info) > 1 {
 		// check token and id is OK
-		m := make(map[string]string)
+		m := make(map[string]interface{})
 		err := json.Unmarshal([]byte(info), &m)
 		if err == nil {
-			t := redis.Get(getIdStrKey(m["id"]))
+			t := redis.Get(getIdStrKey(fmt.Sprint(m["id"])))
 			if t == token {
 				return info
 			}
@@ -93,6 +95,7 @@ func checkTokenRedis(token string) string {
 }
 
 func checkTokenMemory(token string) (info string) {
+	Debug(fmt.Sprintf("checkTokenMemory token=%v", token))
 	saveKeyMutex.RLock()
 	defer saveKeyMutex.RUnlock()
 
@@ -108,9 +111,9 @@ func checkTokenMemory(token string) (info string) {
 		}
 	}
 	if len(info) > 1 { // check id and token is OK
-		m := make(map[string]string)
+		m := make(map[string]interface{})
 		err := json.Unmarshal([]byte(info), &m)
-		t := saveKey[m["id"]]
+		t := saveKey[fmt.Sprint(m["id"])]
 		if err == nil && t != nil && t.info == token {
 			// NOTICE is OK
 		} else {
@@ -121,10 +124,12 @@ func checkTokenMemory(token string) (info string) {
 }
 
 func setTokenRedis(id int, info string, token string) bool {
+	Debug(fmt.Sprintf("setTokenRedis id=%v token=%v", id, token))
+
 	tokenKey := getTokenKey(token)
 	r, err := redis.SetEx(tokenKey, info, saveTimeSecond)
 	if err != nil || !r {
-		Debug("Err=", err, fmt.Sprintf(" id=%v info=%v token=%v", id, info, token))
+		Error("Err=", err, fmt.Sprintf(" id=%v info=%v token=%v", id, info, token))
 		return false
 	}
 
@@ -132,7 +137,7 @@ func setTokenRedis(id int, info string, token string) bool {
 
 	r, err = redis.Set(getIdKey(id), token)
 	if err != nil || !r {
-		Debug("Err=", err, fmt.Sprintf(" id=%v info=%v token=%v", id, info, token))
+		Error("Err=", err, fmt.Sprintf(" id=%v info=%v token=%v", id, info, token))
 		redis.Del(tokenKey)
 		return false
 	}
@@ -140,6 +145,7 @@ func setTokenRedis(id int, info string, token string) bool {
 }
 
 func setTokenMemory(id int, info string, token string) bool {
+	Debug(fmt.Sprintf("setTokenMemory id=%v token=%v", id, token))
 	saveKeyMutex.Lock()
 	defer saveKeyMutex.Unlock()
 
