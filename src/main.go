@@ -5,6 +5,7 @@ import (
 	"webServer/src/common/config"
 	"webServer/src/common/redis"
 	"webServer/src/common/token"
+	"webServer/src/common/tools"
 
 	. "github.com/soekchl/myUtils"
 )
@@ -12,7 +13,14 @@ import (
 var serverPort = ":8080"
 
 func init() {
-	config.Config("../config/config.ini")
+	configFile := "../config/config.ini"
+	// 从启动参数 更改配置文件目录
+	im := tools.GetInputArgs()
+	if len(im["configFile"]) > 0 {
+		configFile = im["configFile"]
+		Warn("Config File Edit configFile=", configFile)
+	}
+	config.Config(configFile)
 	ConnRedis()
 	serverPort = config.GetString("server.port")
 

@@ -6,11 +6,24 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
 	. "github.com/soekchl/myUtils"
 )
+
+func GetInputArgs() map[string]string {
+	m := make(map[string]string)
+	if len(os.Args) > 1 {
+		for i := 1; i < len(os.Args); i++ {
+			l := strings.Split(os.Args[i], "=")
+			m[l[0]] = l[1]
+		}
+	}
+	Warn(fmt.Sprintf("Input Arg %#v", m))
+	return m
+}
 
 // code=0 dataJson=msg  code!=0 dataJson=json(obj)
 func ReturnJson(w http.ResponseWriter, code int, dataJson string) {
