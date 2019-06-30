@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	. "webServer/src/common/myStruct"
 	"webServer/src/common/token"
 	"webServer/src/common/tools"
 	"webServer/src/server"
@@ -39,7 +40,7 @@ func middleware(w http.ResponseWriter, r *http.Request) {
 	urlList := strings.Split(r.RequestURI, "?")
 
 	// 判断路由是否存在
-	ff := server.ServerRouter[urlList[0]]
+	ff := server.GetServer(urlList[0])
 	if ff == nil {
 		tools.ReturnJson(w, 401, "无此接口")
 		return
@@ -72,10 +73,10 @@ func middleware(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	Notice(ti, parm)
-	ff.Func(w, r, &server.Data{TokenInfo: ti, ParmMap: parm})
+	ff.Func(w, r, &Data{TokenInfo: ti, ParmMap: parm})
 }
 
-func checkParm(r *http.Request, parms []server.ParmInfo) (parm map[string]string, err error) {
+func checkParm(r *http.Request, parms []ParmInfo) (parm map[string]string, err error) {
 	parm = make(map[string]string)
 	if len(parms) < 1 {
 		return

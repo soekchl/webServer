@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"net/http"
+	. "webServer/src/common/myStruct"
 	"webServer/src/common/token"
 	"webServer/src/common/tools"
 )
