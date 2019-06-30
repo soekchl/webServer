@@ -86,6 +86,12 @@ func getConfigDatas() {
 		// " " ---> ""
 		k = strings.Replace(k, " ", "", -1)
 		val = strings.Replace(val, " ", "", -1)
+		// "\r" ---> ""
+		k = strings.Replace(k, "\r", "", -1)
+		val = strings.Replace(val, "\r", "", -1)
+		// "\n" ---> ""
+		k = strings.Replace(k, "\n", "", -1)
+		val = strings.Replace(val, "\n", "", -1)
 		configData.Store(k, val)
 	}
 }

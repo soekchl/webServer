@@ -2,6 +2,7 @@ package swagger
 
 import (
 	"encoding/json"
+	"strings"
 	"webServer/src/common/config"
 	. "webServer/src/common/myStruct"
 
@@ -10,9 +11,22 @@ import (
 
 // 指定目录生成 swagger.json文档
 func OutPutSwagger(serverMaps map[string]*ApiInfo, filePath string) {
-	s := Swagger{}
+	getCfgStrList := func(key string, s string) []string {
+		v := config.GetString(key)
+		if len(v) < 1 {
+			return nil
+		}
+		return strings.Split(v, s)
+	}
 
-	s.Infos = getInfos()
+	s := Swagger{
+		Host:     config.GetString("swagger.Host"),
+		BasePath: config.GetString("swagger.BasePath"),
+		Schemes:  getCfgStrList("swagger.Schemes", ","),
+		Consumes: getCfgStrList("swagger.Consumes", ","),
+		Produces: getCfgStrList("swagger.Produces", ","),
+		Infos:    getInfos(),
+	}
 
 	b, err := json.MarshalIndent(s, "", "  ")
 	if err != nil {
@@ -20,7 +34,6 @@ func OutPutSwagger(serverMaps map[string]*ApiInfo, filePath string) {
 		return
 	}
 	Notice("\n", string(b))
-
 }
 
 // 从配置文件获取 项目信息 和 作者信息
