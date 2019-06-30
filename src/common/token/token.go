@@ -28,11 +28,13 @@ var (
 func Config(redisSave bool, saveTokenSecond int, redisHeaderKey string) {
 	saveRedis = redisSave
 	saveTimeSecond = saveTokenSecond
-	if len(redisHeaderKey) > 0 && redisHeaderKey[len(redisHeaderKey)-1] == ':' {
-		redisKey = redisHeaderKey[:len(redisHeaderKey)-1]
-		fmt.Printf("Change Redis Key %20v -> %-20v\n", redisHeaderKey, redisKey)
-	} else {
-		redisKey = redisHeaderKey
+	if len(redisHeaderKey) > 0 {
+		if redisHeaderKey[len(redisHeaderKey)-1] == ':' {
+			redisKey = redisHeaderKey[:len(redisHeaderKey)-1]
+			fmt.Printf("Change Redis Key %20v -> %-20v\n", redisHeaderKey, redisKey)
+		} else {
+			redisKey = redisHeaderKey
+		}
 	}
 	Warn("tokenConfig key=", redisHeaderKey, " saveRedis=", redisSave, " saveSecond=", saveTokenSecond)
 }

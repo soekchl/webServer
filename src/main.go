@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"net/http"
+	"strings"
 	"webServer/src/common/config"
 	"webServer/src/common/redis"
 	"webServer/src/common/token"
 	"webServer/src/common/tools"
+	"webServer/src/server"
 
 	. "github.com/soekchl/myUtils"
 )
@@ -30,7 +33,18 @@ func init() {
 }
 
 func main() {
-	StartServer(serverPort)
+	http.HandleFunc("/", server.Middleware)
+	Warn("Server listen port = ", serverPort)
+	if strings.Index(serverPort, ":") != 0 {
+		serverPort = ":" + serverPort
+	}
+	if len(serverPort) < 1 {
+		panic("Config Need [server.port] ")
+	}
+	err := http.ListenAndServe(serverPort, nil)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func ConnRedis() {
@@ -39,6 +53,10 @@ func ConnRedis() {
 	db, err := config.GetInt("redis.db")
 	if err != nil {
 		db = 0
+	}
+	if len(addr) < 1 {
+		Warn("Not Conn Redis!!!")
+		return
 	}
 
 	Warn(fmt.Sprintf("Redis server=%v pwd=%v db=%v", addr, pwd, db))
