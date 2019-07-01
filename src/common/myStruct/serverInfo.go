@@ -12,10 +12,9 @@ type Data struct {
 type ApiFunc func(http.ResponseWriter, *http.Request, *Data)
 
 type ParmInfo struct {
-	Name        string // 名称
-	Summary     string // 摘要
-	Description string // 描述
-	Req         bool   // 是否必填
+	Name    string // 名称
+	Summary string // 摘要
+	Req     bool   // 是否必填
 }
 
 type ApiInfo struct {

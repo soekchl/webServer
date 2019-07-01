@@ -41,6 +41,14 @@ func main() {
 	if len(serverPort) < 1 {
 		panic("Config Need [server.port] ")
 	}
+
+	if len(config.GetString("swaggerOutFilePath")) > 1 {
+		server.SwaggerOut(config.GetString("swaggerOutFilePath"))
+	}
+	if len(config.GetString("markdownOutFilePath")) > 1 {
+		server.MarkdownOut(config.GetString("markdownOutFilePath"))
+	}
+
 	err := http.ListenAndServe(serverPort, nil)
 	if err != nil {
 		panic(err)
