@@ -48,7 +48,7 @@ func Middleware(w http.ResponseWriter, r *http.Request) {
 	// 判断路由是否存在
 	ff := serverRouter[urlList[0]]
 	if ff == nil {
-		tools.ReturnJson(w, 401, "无此接口")
+		tools.ReturnJson(w, 402, "无此接口")
 		return
 	}
 
