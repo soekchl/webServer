@@ -3,7 +3,7 @@ github.com/go-ole/go-ole v1.2.4/go.mod h1:XCwSNxSkXRo4vlyPy93sltvi/qJq0jqQhjqQNI
 github.com/go-redis/redis v6.15.2+incompatible h1:9SpNVG76gr6InJGxoZ6IuuxaCOQwDAhzyXg+Bs+0Sb4=
 github.com/go-redis/redis v6.15.2+incompatible/go.mod h1:NAIEuMOZ/fxfXJIrKDQDz8wamY7mA7PouImQ2Jvg6kA=
 github.com/shirou/gopsutil v2.18.12+incompatible/go.mod h1:5b4v6he4MtMOwMlS0TUMTu2PcXUg8+E1lC7eC3UO/RA=
-github.com/soekchl/myUtils v0.0.0-20190627004919-bde6573278e1 h1:xFtR2fritBbXxtj9+ZV5WvK3QIX0FlZ0FVaKi4KryRI=
-github.com/soekchl/myUtils v0.0.0-20190627004919-bde6573278e1/go.mod h1:CakvUGrwWYmN72uXUtx0HW0N0iw2zGC6hj09SueWebY=
+github.com/soekchl/myUtils v0.0.0-20190702012605-924b2442f8e4 h1:ydQrjIBvBJ24t7g+vhSl7RFgeZppOaFgOfL6zoh7bhQ=
+github.com/soekchl/myUtils v0.0.0-20190702012605-924b2442f8e4/go.mod h1:CakvUGrwWYmN72uXUtx0HW0N0iw2zGC6hj09SueWebY=
 gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df h1:n7WqCuqOuCbNr617RXOY0AWRXxgwEyPp2z+p0+hgMuE=
 gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df/go.mod h1:LRQQ+SO6ZHR7tOkpBDuZnXENFzX8qRjMDMyPD6BRkCw=
