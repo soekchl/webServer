@@ -3,6 +3,8 @@ package tools
 import (
 	"fmt"
 	"net/http"
+	"strconv"
+	"strings"
 	. "webServer/src/common/myStruct"
 )
 
@@ -17,6 +19,13 @@ func CheckParm(r *http.Request, parms []ParmInfo) (parm map[string]string, err e
 		if v.Req && len(value) < 1 {
 			err = fmt.Errorf("%v 必填", v.GetDesc())
 			return
+		}
+		if strings.Index(strings.ToUpper(v.Type), "INT") >= 0 {
+			_, err := strconv.Atoi(v)
+			if err != nil {
+				err = fmt.Errorf("%v 类型错误", v.GetDesc())
+				return
+			}
 		}
 		parm[v.Name] = value
 	}

@@ -126,7 +126,7 @@ func getParm(apiInfo *ApiInfo) (parms []Parameter) {
 			In:          in,
 			Name:        v.Name,
 			Description: v.Summary,
-			Type:        "string", // TODO
+			Type:        strings.ToLower(v.Type),
 		})
 	}
 	return

@@ -13,6 +13,7 @@ type ApiFunc func(http.ResponseWriter, *http.Request, *Data)
 
 type ParmInfo struct {
 	Name    string // 名称
+	Type    string // 类型 string,int
 	Summary string // 摘要
 	Req     bool   // 是否必填
 }

@@ -26,8 +26,8 @@ func init() {
 		Description: "测试登陆",
 		Method:      map[string]bool{"GET": true, "POST": true},
 		Parms: []ParmInfo{
-			ParmInfo{Name: "account", Req: true, Summary: "帐号"},
-			ParmInfo{Name: "password", Req: true, Summary: "密码"},
+			ParmInfo{Name: "account", Req: true, Summary: "帐号", Type: "string"},
+			ParmInfo{Name: "password", Req: true, Summary: "密码", Type: "string"},
 		},
 	})
 
