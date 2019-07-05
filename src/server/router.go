@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"webServer/src/common/markdown"
 	. "webServer/src/common/myStruct"
 	"webServer/src/common/swagger"
 	"webServer/src/common/token"
@@ -19,11 +20,13 @@ var (
 // swagger 文档输出
 func SwaggerOut(filePath string) {
 	swagger.OutPutSwagger(serverRouter, filePath)
+	Warn("Swagger File Out: ", filePath)
 }
 
 // markdown 文档输出
 func MarkdownOut(filePath string) {
-
+	markdown.OutPutMarkdown(serverRouter, filePath)
+	Warn("Markdown File Out: ", filePath)
 }
 
 // 设置服务路由 f-函数 funcName-函数名 apiName-映射名臣

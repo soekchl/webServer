@@ -21,7 +21,7 @@ func CheckParm(r *http.Request, parms []ParmInfo) (parm map[string]string, err e
 			return
 		}
 		if strings.Index(strings.ToUpper(v.Type), "INT") >= 0 {
-			_, err := strconv.Atoi(v)
+			_, err = strconv.Atoi(value)
 			if err != nil {
 				err = fmt.Errorf("%v 类型错误", v.GetDesc())
 				return
