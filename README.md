@@ -8,8 +8,8 @@
 #### 4、swagger	文档生成
 #### 5、api doc	文档生成
 #### 6、mysql
-#### ~~7、mq队列~~
-#### ~~8、kafka~~
+#### ~~7、mq队列 https://github.com/streadway/amqp/tree/master/_examples~~
+#### ~~8、kafka	https://github.com/segmentio/kafka-go/tree/master/examples~~
 #### 9、钉钉扫码登录(普通用户 和 公司内部)
 #### 10、API统计？
 #### 11、mock？
