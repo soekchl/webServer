@@ -20,6 +20,7 @@ var (
 )
 
 func init() {
+	// config.Config("../../../config/config.ini") // test config.ini
 	dbhost := config.GetString("mysql.host")
 	dbport := config.GetString("mysql.port")
 	dbuser := config.GetString("mysql.user")
@@ -29,7 +30,7 @@ func init() {
 	if dbport == "" {
 		dbport = "3306"
 	}
-	dsn := dbuser + ":" + dbpassword + "@tcp(" + dbhost + dbport + ")/" + dbname + "?charset=utf8"
+	dsn := dbuser + ":" + dbpassword + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8"
 
 	if timezone != "" {
 		dsn = dsn + "&loc=" + url.QueryEscape(timezone)

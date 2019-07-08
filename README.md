@@ -8,6 +8,6 @@
   4、swagger	文档生成
   5、api doc	文档生成
   6、mysql
-  7、mq队列
-  8、kafka
+  ~~7、mq队列~~
+  ~~8、kafka~~
   9、钉钉扫码登录(普通用户 和 公司内部)

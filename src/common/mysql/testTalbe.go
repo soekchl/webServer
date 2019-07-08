@@ -1,8 +1,8 @@
 package mysql
 
 type TestTable struct {
-	Id int64  `orm:"auto;pk" json:"-"` // not out put json
-	Ip string `json:"query" orm:"size(16);description(ip4 地址)"`
+	Id   int64  `orm:"auto;pk" json:"-"` // not out put json
+	Name string `json:"query" orm:"size(32);description(名称)"`
 }
 
 func (this *TestTable) TableName() string {
