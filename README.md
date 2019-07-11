@@ -13,7 +13,8 @@
 #### 9、钉钉扫码登录(普通用户 和 公司内部)
 #### 10、API统计？
 #### 11、mock？
-#### 12、websocket
+#### ~~12、websocket		https://github.com/soekchl/GoWebSocket.git~~
 #### 13、TCP
 #### 14、UDP
 #### 15、protoBuf
+#### 16、memory
