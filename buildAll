@@ -1,20 +1,27 @@
 #!/bin/bash
 
-echo "build common"
-cd src/common/config/
-go build
+DIR='./src/common/'
 
-cd ../email/
-go build
+export GO111MODULE=on
 
-cd ../redis/
-go build
+for v in `ls $DIR` 
+do
+	if [ -d $DIR$v ]
+	then
+		echo 'build '$v
+		cd $DIR$v
+		go get
+		go build
+		cd ../../../
+	fi
+done
 
-cd ../token/
+cd ./src/server
 go build
+echo 'build server'
 
-cd ../tools/
+cd ..
 go build
+echo 'build server'
 
-cd ../../
-go build -o ../server
+echo 'build over'
