@@ -1,16 +1,17 @@
 package memory
 
 import (
-	. "github.com/soekchl/myUtils"
 	"sync"
 	"time"
+
+	. "github.com/soekchl/myUtils"
 )
 
 var (
-	saveMem              sync.Map
-	saveSecond           = int64(30 * 60)
-	delList              []string                 // first over time del keys
-	activeSecondMap      = make(map[string]int64) // del key active timestamp and have delList
+	saveMem              sync.Map                 // 保存主要数据
+	saveSecond           = int64(30 * 60)         // 数据默认保留时常
+	delList              []string                 // 删除列表， 越靠前先删除
+	activeSecondMap      = make(map[string]int64) // 删除列表 记录删除时间 每次使用数据就从新记录时间
 	activeSecondMapMutex sync.Mutex
 )
 
@@ -19,6 +20,12 @@ func init() {
 }
 
 func startCheck() {
+	defer func() {
+		if err := recover(); err != nil {
+			Error(err)
+			startCheck()
+		}
+	}()
 	Warn("[Memory] startCheck  ---> ")
 	n := 0
 	i := 0
