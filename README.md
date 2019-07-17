@@ -1,6 +1,10 @@
 # webServer
 简单web服务
 
+url
+	http://localhost:8080/test/login?account=root&password=admin
+
+
 # 功能目录
 #### 1、token
 #### ~~2、发送手机短信~~
