@@ -4,3 +4,5 @@
 src/common/config/config.ini
 src/common/swagger/swagger
 src/src
+src/apidoc.md
+src/swagger.json
