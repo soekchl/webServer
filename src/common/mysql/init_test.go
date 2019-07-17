@@ -2,7 +2,6 @@ package mysql
 
 import (
 	"testing"
-	"webServer/src/common/config"
 )
 
 func Test(t *testing.T) {
