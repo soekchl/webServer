@@ -16,3 +16,5 @@ sql 记录 --- 最小单位分钟
 当前模块提供接口数据输出
 
 在应用场景增加界面输出等等
+
+增加 https://www.echartsjs.com/examples/ 输出
