@@ -54,6 +54,14 @@ func SetNx(key, value string) (bool, error) {
 	return client.SetNX(key, value, 0).Result()
 }
 
+// 增加key的ttl时间 延长key消失时间
+func Expire(key string, addSecond int) (bool, error) {
+	if client == nil {
+		return false, NotConnError
+	}
+	return client.Expire(key, time.Second*time.Duration(addSecond)).Result()
+}
+
 func SetEx(key, value string, saveSecond int) (bool, error) {
 	if client == nil {
 		return false, NotConnError
